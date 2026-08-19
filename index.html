@@ -53,9 +53,38 @@ nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-con
 .nav-drop-item:hover{background:var(--panel-2);padding-left:17px;}
 .nav-drop-item .ndi-t{font-family:'Archivo',sans-serif;font-size:13px;font-weight:700;color:var(--snow);}
 .nav-drop-item .ndi-d{font-size:11px;color:var(--snow-dim);}
+
+/* HAMBURGER + MOBILE DRAWER */
+
+
+
 .nav-cta{display:flex;align-items:center;gap:10px;}
 .phone-mini{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--snow-dim);display:flex;flex-direction:column;text-align:right;line-height:1.25;}
 .phone-mini span{display:block;font-size:9px;color:var(--glacier);letter-spacing:.08em;text-transform:uppercase;}
+/* MOBILE MENU */
+.hamburger{display:none;width:40px;height:40px;border-radius:8px;border:1px solid var(--line);background:var(--panel-solid);align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;}
+.hamburger-lines{width:18px;height:13px;position:relative;}
+.hamburger-lines span{position:absolute;left:0;width:100%;height:1.6px;background:var(--snow);border-radius:2px;transition:transform .25s,opacity .2s;}
+.hamburger-lines span:nth-child(1){top:0;}
+.hamburger-lines span:nth-child(2){top:5.5px;}
+.hamburger-lines span:nth-child(3){top:11px;}
+.hamburger.open .hamburger-lines span:nth-child(1){transform:translateY(5.5px) rotate(45deg);}
+.hamburger.open .hamburger-lines span:nth-child(2){opacity:0;}
+.hamburger.open .hamburger-lines span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg);}
+
+.mobile-drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:80;opacity:0;visibility:hidden;transition:opacity .25s;}
+.mobile-drawer-overlay.open{opacity:1;visibility:visible;}
+.mobile-drawer{position:fixed;top:0;right:0;bottom:0;width:78%;max-width:320px;background:var(--panel-solid);border-left:1px solid var(--line);z-index:90;transform:translateX(100%);transition:transform .3s cubic-bezier(.2,.6,.2,1);display:flex;flex-direction:column;padding:24px 22px;padding-top:calc(24px + env(safe-area-inset-top));overflow-y:auto;}
+.mobile-drawer.open{transform:translateX(0);}
+.mobile-drawer-close{align-self:flex-end;width:36px;height:36px;border-radius:8px;border:1px solid var(--line);background:var(--slate);display:flex;align-items:center;justify-content:center;margin-bottom:18px;cursor:pointer;}
+.mobile-drawer-close svg{width:16px;height:16px;color:var(--snow-dim);}
+.mobile-drawer-group{margin-bottom:22px;}
+.mobile-drawer-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--glacier);text-transform:uppercase;margin-bottom:10px;}
+.mobile-drawer a.mobile-link{display:block;font-family:'Archivo',sans-serif;font-size:15px;font-weight:700;color:var(--snow);text-decoration:none;padding:11px 0;border-bottom:1px solid var(--line);}
+.mobile-drawer a.mobile-sublink{display:block;font-size:13px;color:var(--snow-dim);text-decoration:none;padding:9px 0 9px 14px;border-bottom:1px solid var(--line);}
+.mobile-drawer-cta{margin-top:auto;padding-top:20px;}
+.mobile-drawer-cta a{display:flex;align-items:center;justify-content:center;font-family:'Archivo',sans-serif;font-size:13px;font-weight:700;color:var(--slate);background:var(--ember);padding:14px;border-radius:10px;text-decoration:none;}
+
 .btn-call{font-family:'Archivo',sans-serif;font-size:12.5px;font-weight:700;letter-spacing:.02em;color:var(--slate);background:var(--ember);padding:11px 22px;text-decoration:none;border-radius:8px;transition:transform .15s,filter .15s;white-space:nowrap;}
 .btn-call:hover{filter:brightness(1.08);transform:translateY(-1px);}
 
@@ -170,7 +199,7 @@ section{padding:90px 48px;border-bottom:1px solid var(--line);}
 .area-elev{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--glacier);}
 .area-name{font-family:'Archivo',sans-serif;font-size:15px;font-weight:700;}
 .area-note{font-size:12px;color:var(--snow-dim);}
-.area-map-panel{border:1px solid var(--line);border-radius:14px;background:var(--panel-solid);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;min-height:280px;}
+.area-map-panel{border:1px solid var(--line);border-radius:14px;background:var(--panel-solid);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:32px;}
 
 /* CONTACT */
 #contact{background:var(--panel-solid);border-bottom:none;}
@@ -212,9 +241,14 @@ footer{padding:26px 48px;display:flex;align-items:center;justify-content:space-b
 .reveal.in{opacity:1;transform:translateY(0);}
 .nav-links > a.active{color:var(--snow);}
 
+@media(min-width:901px){
+  .area-map-panel{min-height:280px;}
+}
+
 @media(max-width:900px){
   nav{padding:14px 20px;}
   .nav-links{display:none;}
+  .hamburger{display:flex;}
   .phone-mini{display:none;}
   #hero{padding:60px 20px 60px;}
   .hero-inner{grid-template-columns:1fr;gap:36px;}
@@ -222,6 +256,7 @@ footer{padding:26px 48px;display:flex;align-items:center;justify-content:space-b
   .cov-grid{grid-template-columns:1fr;}
   .cov-cell{border-bottom:1px solid var(--line);}
   .partner-slot{width:100%;max-width:280px;height:64px;}
+  .area-map-panel{padding:20px;}
   .partners-row{flex-direction:column;align-items:center;}
   .trades-grid{grid-template-columns:1fr;}
   .portfolio-grid{grid-template-columns:1fr;}
@@ -278,8 +313,40 @@ footer{padding:26px 48px;display:flex;align-items:center;justify-content:space-b
   <div class="nav-cta">
     <div class="phone-mini"><span>Dispatch</span>250-318-3978</div>
     <a href="tel:2503183978" class="btn-call">Call Now</a>
+    <button class="hamburger" id="navHamburger" onclick="toggleDrawer()" aria-label="Open menu">
+      <span class="hamburger-lines"><span></span><span></span><span></span></span>
+    </button>
   </div>
 </nav>
+
+<div class="mobile-drawer-overlay" id="drawerOverlay" onclick="toggleDrawer()"></div>
+<div class="mobile-drawer" id="mobileDrawer">
+  <button class="mobile-drawer-close" onclick="toggleDrawer()" aria-label="Close menu">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+
+  <div class="mobile-drawer-group">
+    <div class="mobile-drawer-label">Services</div>
+    <a class="mobile-sublink" href="#trades" onclick="toggleDrawer()">Plumbing</a>
+    <a class="mobile-sublink" href="#trades" onclick="toggleDrawer()">Gas Fitting</a>
+    <a class="mobile-sublink" href="#trades" onclick="toggleDrawer()">Electrical</a>
+  </div>
+
+  <div class="mobile-drawer-group">
+    <div class="mobile-drawer-label">About</div>
+    <a class="mobile-sublink" href="#maintenance" onclick="toggleDrawer()">Annual Maintenance</a>
+    <a class="mobile-sublink" href="#area" onclick="toggleDrawer()">Service Area</a>
+  </div>
+
+  <div class="mobile-drawer-group">
+    <a class="mobile-link" href="#portfolio" onclick="toggleDrawer()">For Property Managers</a>
+    <a class="mobile-link" href="#contact" onclick="toggleDrawer()">Contact</a>
+  </div>
+
+  <div class="mobile-drawer-cta">
+    <a href="tel:2503183978">Call or Text 250-318-3978</a>
+  </div>
+</div>
 
 <section id="hero">
   <svg class="topo" viewBox="0 0 1400 700" preserveAspectRatio="none">
@@ -478,12 +545,12 @@ footer{padding:26px 48px;display:flex;align-items:center;justify-content:space-b
       <div class="area-row"><span class="area-elev">···</span><span class="area-name">Surrounding areas</span><span class="area-note">Ask dispatch</span></div>
     </div>
     <div class="area-map-panel">
-      <svg width="90%" height="220" viewBox="0 0 400 220">
-        <path d="M0,180 Q80,60 160,110 T400,50" stroke="#E8622C" stroke-width="2" fill="none"/>
-        <circle cx="160" cy="110" r="4" fill="#E8622C"/>
-        <circle cx="0" cy="180" r="4" fill="#7FA6B3"/>
-        <text x="150" y="95" fill="#F5F2EA" font-family="IBM Plex Mono" font-size="11">Sun Peaks</text>
-        <text x="10" y="200" fill="#7FA6B3" font-family="IBM Plex Mono" font-size="11">Kamloops</text>
+      <svg viewBox="0 0 320 160" preserveAspectRatio="xMidYMid meet" style="width:100%;height:auto;max-width:320px;">
+        <path d="M20,130 Q90,50 160,80 T300,30" stroke="#E8622C" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <circle cx="160" cy="80" r="5" fill="#E8622C"/>
+        <circle cx="20" cy="130" r="5" fill="#7FA6B3"/>
+        <text x="140" y="66" fill="#F5F2EA" font-family="IBM Plex Mono" font-size="13" text-anchor="middle">Sun Peaks</text>
+        <text x="20" y="150" fill="#7FA6B3" font-family="IBM Plex Mono" font-size="13" text-anchor="start">Kamloops</text>
       </svg>
     </div>
   </div>
@@ -532,6 +599,17 @@ footer{padding:26px 48px;display:flex;align-items:center;justify-content:space-b
 </a>
 
 <script>
+function toggleDrawer(){
+  var drawer = document.getElementById('mobileDrawer');
+  var overlay = document.getElementById('drawerOverlay');
+  var burger = document.getElementById('navHamburger');
+  var isOpen = drawer.classList.contains('open');
+  drawer.classList.toggle('open', !isOpen);
+  overlay.classList.toggle('open', !isOpen);
+  burger.classList.toggle('open', !isOpen);
+  document.body.style.overflow = isOpen ? '' : 'hidden';
+}
+
 function toggleDrop(id){
   var el = document.getElementById(id);
   var isOpen = el.classList.contains('open');
