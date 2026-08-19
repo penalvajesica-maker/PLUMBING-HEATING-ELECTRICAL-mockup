@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Sun Peaks Plumbing, Heating and Electrical | Licensed Plumbers · Gas Fitters · Electricians</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Archivo+Black&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --slate:#0F1E29;
+  --panel:#17293700;
+  --panel-solid:#1B2E3D;
+  --panel-2:#213B4E;
+  --line:#324A5C;
+  --snow:#F5F2EA;
+  --snow-dim:#B9C4CB;
+  --ember:#E8622C;
+  --ember-dim:#8A3D22;
+  --glacier:#7FA6B3;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--slate);color:var(--snow);font-family:'Inter',sans-serif;overflow-x:hidden;line-height:1.5;}
+a{color:inherit;}
+
+/* topo background texture */
+.topo{position:absolute;inset:0;opacity:.07;pointer-events:none;z-index:0;}
+
+/* ALERT BAR */
+.alert-bar{background:var(--ember);color:var(--slate);display:flex;align-items:center;justify-content:center;gap:8px;padding:9px 16px;font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:500;letter-spacing:.01em;text-align:center;flex-wrap:wrap;}
+.alert-bar a{font-weight:700;text-decoration:underline;text-underline-offset:2px;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:18px 48px;background:rgba(15,30,41,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);}
+.logo{display:flex;align-items:center;gap:11px;}
+.logo-mark{width:34px;height:34px;flex-shrink:0;}
+.logo-text{display:flex;flex-direction:column;line-height:1.15;}
+.logo-text .l1{font-family:'Archivo Black',sans-serif;font-size:14.5px;letter-spacing:.02em;color:var(--snow);}
+.logo-text .l2{font-family:'Archivo Black',sans-serif;font-size:11px;letter-spacing:.02em;color:var(--snow);opacity:.9;}
+.logo-text .l3{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.1em;color:var(--glacier);text-transform:uppercase;margin-top:3px;opacity:.75;}
+.nav-links{display:flex;gap:34px;align-items:center;}
+.nav-links > a{font-size:12.5px;font-weight:500;letter-spacing:.03em;text-decoration:none;color:var(--snow-dim);transition:color .2s;}
+.nav-links > a:hover{color:var(--snow);}
+
+.nav-drop{position:relative;}
+.nav-drop-trig{display:flex;align-items:center;gap:6px;background:none;border:none;font-family:'Inter',sans-serif;font-size:12.5px;font-weight:500;letter-spacing:.02em;color:var(--snow-dim);cursor:pointer;padding:8px 4px;transition:color .2s;}
+.nav-drop-trig:hover,.nav-drop.open .nav-drop-trig{color:var(--snow);}
+.nav-drop-caret{width:9px;height:9px;transition:transform .25s cubic-bezier(.4,0,.2,1);flex-shrink:0;color:var(--glacier);}
+.nav-drop.open .nav-drop-caret{transform:rotate(180deg);color:var(--ember);}
+.nav-drop-menu{position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(-8px) scale(.98);min-width:240px;background:var(--panel-solid);border:1px solid var(--line);border-radius:12px;padding:8px;opacity:0;visibility:hidden;transition:opacity .2s cubic-bezier(.4,0,.2,1),transform .2s cubic-bezier(.4,0,.2,1);box-shadow:0 16px 36px rgba(0,0,0,.4);z-index:60;}
+.nav-drop.open .nav-drop-menu{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0) scale(1);}
+.nav-drop-item{display:flex;flex-direction:column;gap:2px;padding:11px 13px;border-radius:8px;text-decoration:none;transition:background .15s,padding-left .15s;}
+.nav-drop-item:hover{background:var(--panel-2);padding-left:17px;}
+.nav-drop-item .ndi-t{font-family:'Archivo',sans-serif;font-size:13px;font-weight:700;color:var(--snow);}
+.nav-drop-item .ndi-d{font-size:11px;color:var(--snow-dim);}
+.nav-cta{display:flex;align-items:center;gap:10px;}
+.phone-mini{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--snow-dim);display:flex;flex-direction:column;text-align:right;line-height:1.25;}
+.phone-mini span{display:block;font-size:9px;color:var(--glacier);letter-spacing:.08em;text-transform:uppercase;}
+.btn-call{font-family:'Archivo',sans-serif;font-size:12.5px;font-weight:700;letter-spacing:.02em;color:var(--slate);background:var(--ember);padding:11px 22px;text-decoration:none;border-radius:8px;transition:transform .15s,filter .15s;white-space:nowrap;}
+.btn-call:hover{filter:brightness(1.08);transform:translateY(-1px);}
+
+/* HERO */
+#hero{position:relative;padding:110px 48px 90px;border-bottom:1px solid var(--line);overflow:hidden;}
+.hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center;}
+.hero-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;color:var(--glacier);text-transform:uppercase;display:flex;align-items:center;gap:8px;margin-bottom:26px;}
+.hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--ember);flex-shrink:0;}
+.hero-h{font-family:'Archivo Black',sans-serif;font-size:clamp(38px,4.6vw,60px);line-height:1.03;letter-spacing:-.01em;margin-bottom:22px;}
+.hero-h .accent{color:var(--ember);}
+.hero-sub{font-size:16.5px;color:var(--snow-dim);max-width:460px;margin-bottom:34px;line-height:1.65;}
+.hero-sub strong{color:var(--snow);font-weight:600;}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:40px;}
+.btn-primary{font-family:'Archivo',sans-serif;font-size:13px;font-weight:700;letter-spacing:.02em;color:var(--slate);background:var(--ember);padding:16px 30px;text-decoration:none;border-radius:10px;transition:transform .15s,filter .15s,box-shadow .15s;}
+.btn-primary:hover{filter:brightness(1.08);transform:translateY(-2px);box-shadow:0 10px 24px rgba(232,98,44,.28);}
+.btn-outline{font-family:'Archivo',sans-serif;font-size:13px;font-weight:600;letter-spacing:.02em;color:var(--snow);background:var(--panel-2);padding:16px 26px;border:1px solid var(--line);text-decoration:none;border-radius:10px;transition:border-color .15s,transform .15s,background .15s;}
+.btn-outline:hover{border-color:var(--glacier);background:var(--panel-solid);transform:translateY(-2px);}
+.hero-licenses{display:flex;gap:10px;flex-wrap:wrap;padding-top:26px;border-top:1px solid var(--line);}
+.lic{font-family:'IBM Plex Mono',monospace;background:var(--panel-solid);border:1px solid var(--line);border-radius:10px;padding:10px 16px;}
+.lic-label{font-size:9px;letter-spacing:.06em;color:var(--glacier);text-transform:uppercase;margin-bottom:4px;}
+.lic-val{font-size:12.5px;color:var(--snow);}
+
+.hero-panel{background:var(--panel-solid);border:1px solid var(--line);border-radius:12px;padding:0;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.25);}
+.hero-panel-head{padding:18px 22px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;background:var(--panel-2);}
+.hero-panel-title{font-family:'Archivo',sans-serif;font-size:13px;font-weight:700;color:var(--snow);letter-spacing:.01em;}
+.status-live{display:flex;align-items:center;gap:6px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:#8FCB8F;letter-spacing:.04em;}
+.status-dot{width:6px;height:6px;border-radius:50%;background:#8FCB8F;}
+.hero-panel-body{padding:8px 10px;display:flex;flex-direction:column;}
+.range-row{display:flex;align-items:center;gap:14px;padding:14px 12px;border-radius:8px;transition:background .15s;}
+.range-row:hover{background:var(--panel-2);}
+.range-ic{width:38px;height:38px;flex-shrink:0;border-radius:8px;background:var(--slate);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;}
+.range-ic svg{width:18px;height:18px;color:var(--ember);}
+.range-t{font-family:'Archivo',sans-serif;font-size:13.5px;font-weight:700;color:var(--snow);margin-bottom:2px;}
+.range-d{font-size:12px;color:var(--snow-dim);}
+
+/* SERVICE STRIP */
+#coverage{padding:60px 48px;border-bottom:1px solid var(--line);}
+.cov-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+.cov-cell{padding:24px 26px;background:var(--panel-solid);border:1px solid var(--line);border-radius:12px;transition:border-color .2s,transform .2s;}
+.cov-cell:hover{border-color:var(--glacier);transform:translateY(-2px);}
+
+/* PARTNER LOGOS */
+#partners{padding:44px 48px;border-bottom:1px solid var(--line);}
+.partners-label{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.1em;color:var(--glacier);text-transform:uppercase;text-align:center;margin-bottom:28px;}
+.partners-row{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;}
+.partner-slot{width:180px;height:76px;border:1px dashed var(--line);border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--panel-solid);transition:border-color .2s;}
+.partner-slot:hover{border-color:var(--glacier);}
+.partner-slot img{max-width:80%;max-height:60%;object-fit:contain;}
+.partner-slot-text{text-align:center;padding:0 10px;}
+.partner-slot-name{font-family:'Archivo',sans-serif;font-size:11.5px;font-weight:700;color:var(--snow-dim);}
+.partner-slot-note{font-family:'IBM Plex Mono',monospace;font-size:8.5px;color:var(--glacier);text-transform:uppercase;letter-spacing:.04em;margin-top:3px;}
+.cov-n{font-family:'Archivo Black',sans-serif;font-size:26px;color:var(--ember);margin-bottom:4px;}
+.cov-l{font-size:11.5px;color:var(--snow-dim);letter-spacing:.02em;}
+
+/* SECTION SHARED */
+section{padding:90px 48px;border-bottom:1px solid var(--line);}
+.sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:14px;}
+.sec-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.08em;color:var(--glacier);text-transform:uppercase;}
+.sec-h{font-family:'Archivo Black',sans-serif;font-size:clamp(26px,3.2vw,38px);line-height:1.08;margin-bottom:40px;max-width:640px;}
+.sec-h .accent{color:var(--ember);}
+.sec-intro{font-size:15px;color:var(--snow-dim);max-width:560px;margin-bottom:44px;line-height:1.7;}
+
+/* TRADES / SERVICES */
+.trades-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.trade{background:var(--panel-solid);border:1px solid var(--line);border-radius:14px;padding:32px 28px;display:flex;flex-direction:column;transition:border-color .2s,transform .2s;}
+.trade:hover{border-color:var(--glacier);transform:translateY(-3px);}
+.trade-badge{font-family:'Archivo',sans-serif;font-size:10.5px;font-weight:700;letter-spacing:.03em;color:var(--ember);text-transform:uppercase;background:rgba(232,98,44,.12);display:inline-block;padding:6px 12px;border-radius:20px;margin-bottom:18px;align-self:flex-start;}
+.trade-t{font-family:'Archivo',sans-serif;font-size:19px;font-weight:700;margin-bottom:10px;}
+.trade-lic{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--glacier);margin-bottom:16px;}
+.trade-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.trade-list li{font-size:13.5px;color:var(--snow-dim);padding-left:16px;position:relative;line-height:1.5;}
+.trade-list li::before{content:'▸';position:absolute;left:0;color:var(--ember);font-size:11px;top:2px;}
+
+/* PROPERTY MANAGERS */
+#portfolio{background:var(--panel-solid);}
+.portfolio-top{display:flex;align-items:flex-start;justify-content:space-between;gap:40px;flex-wrap:wrap;margin-bottom:44px;}
+.portfolio-copy{max-width:520px;}
+.portfolio-tag{display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.08em;color:var(--glacier);text-transform:uppercase;background:var(--slate);border:1px solid var(--line);border-radius:20px;padding:6px 14px;margin-bottom:18px;}
+.portfolio-tag-dot{width:6px;height:6px;border-radius:50%;background:var(--ember);}
+.portfolio-lead{font-size:15px;color:var(--snow-dim);line-height:1.75;}
+.portfolio-lead strong{color:var(--snow);font-weight:600;}
+.portfolio-cta{display:inline-flex;align-items:center;gap:8px;font-family:'Archivo',sans-serif;font-size:12.5px;font-weight:700;color:var(--snow);background:transparent;border:1px solid var(--line);padding:13px 22px;border-radius:10px;text-decoration:none;white-space:nowrap;transition:border-color .15s,transform .15s,background .15s;}
+.portfolio-cta:hover{border-color:var(--glacier);background:var(--slate);transform:translateY(-2px);}
+.portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.pf-card{background:var(--slate);border:1px solid var(--line);border-radius:14px;padding:26px 24px;transition:border-color .2s,transform .2s;}
+.pf-card:hover{border-color:var(--glacier);transform:translateY(-3px);}
+.pf-ic{width:34px;height:34px;border-radius:8px;background:var(--panel-2);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+.pf-ic svg{width:16px;height:16px;color:var(--ember);}
+.pf-t{font-family:'Archivo',sans-serif;font-size:14.5px;font-weight:700;color:var(--snow);margin-bottom:6px;}
+.pf-d{font-size:12.5px;color:var(--snow-dim);line-height:1.55;}
+
+/* MAINTENANCE CALLOUT */
+#maintenance{background:var(--panel-solid);}
+.maint-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;}
+.maint-copy p{font-size:15px;color:var(--snow-dim);line-height:1.8;margin-bottom:16px;}
+.maint-copy strong{color:var(--snow);font-weight:600;}
+.maint-panel{border:1px solid var(--line);border-radius:14px;padding:28px 26px;background:var(--slate);}
+.maint-panel-t{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;color:var(--ember);text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;gap:8px;}
+.maint-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);align-items:flex-start;}
+.maint-item:last-child{border-bottom:none;}
+.maint-check{width:20px;height:20px;border-radius:50%;background:rgba(232,98,44,.14);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;}
+.maint-check svg{width:11px;height:11px;color:var(--ember);}
+.maint-item-t{font-size:13.5px;color:var(--snow);font-weight:500;margin-bottom:2px;}
+.maint-item-d{font-size:12px;color:var(--snow-dim);line-height:1.5;}
+
+/* SERVICE AREA */
+#area .area-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;}
+.area-list{display:flex;flex-direction:column;}
+.area-row{display:grid;grid-template-columns:28px 1fr auto;gap:16px;align-items:center;padding:18px 14px;border-bottom:1px solid var(--line);border-radius:8px;transition:background .15s,padding-left .15s;}
+.area-row:hover{background:var(--panel-solid);padding-left:18px;}
+.area-row:first-child{border-top:1px solid var(--line);}
+.area-elev{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--glacier);}
+.area-name{font-family:'Archivo',sans-serif;font-size:15px;font-weight:700;}
+.area-note{font-size:12px;color:var(--snow-dim);}
+.area-map-panel{border:1px solid var(--line);border-radius:14px;background:var(--panel-solid);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;min-height:280px;}
+
+/* CONTACT */
+#contact{background:var(--panel-solid);border-bottom:none;}
+.contact-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:70px;align-items:center;}
+.contact-h{font-family:'Archivo Black',sans-serif;font-size:clamp(30px,3.6vw,44px);line-height:1.06;margin-bottom:20px;}
+.contact-h .accent{color:var(--ember);}
+.contact-sub{font-size:15.5px;color:var(--snow-dim);line-height:1.75;margin-bottom:32px;max-width:460px;}
+.contact-actions{display:flex;gap:14px;flex-wrap:wrap;}
+.contact-panel{background:var(--slate);border:1px solid var(--line);border-radius:10px;padding:0;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.28);}
+.cp-head{padding:22px 26px;background:var(--panel-2);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;}
+.cp-head-t{font-family:'Archivo',sans-serif;font-size:14.5px;font-weight:700;color:var(--snow);}
+.cp-head-s{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--glacier);letter-spacing:.05em;text-transform:uppercase;margin-top:2px;}
+.cp-body{padding:26px;}
+.cfield{margin-bottom:18px;position:relative;}
+.cfield label{display:block;font-size:11.5px;font-weight:500;color:var(--snow-dim);margin-bottom:7px;letter-spacing:.01em;}
+.cfield input,.cfield textarea{width:100%;background:var(--panel-2);border:1.5px solid var(--line);border-radius:8px;padding:13px 14px;color:var(--snow);font-family:'Inter',sans-serif;font-size:16px;transition:border-color .18s,background .18s;}
+.cfield input::placeholder,.cfield textarea::placeholder{color:#5F7688;}
+.cfield textarea{resize:vertical;min-height:80px;font-family:'Inter',sans-serif;}
+.cfield input:focus,.cfield textarea:focus{outline:none;border-color:var(--ember);background:var(--slate);}
+.form-submit{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;font-family:'Archivo',sans-serif;font-size:13.5px;font-weight:700;letter-spacing:.02em;color:var(--slate);background:var(--ember);padding:15px;border:none;border-radius:8px;cursor:pointer;transition:filter .2s,transform .15s;margin-top:4px;}
+.form-submit:hover{filter:brightness(1.1);transform:translateY(-1px);}
+.cp-divider{display:flex;align-items:center;gap:12px;margin:22px 0 18px;}
+.cp-divider-line{flex:1;height:1px;background:var(--line);}
+.cp-divider-t{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--snow-dim);letter-spacing:.06em;text-transform:uppercase;}
+.cp-wa{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;background:#25D366;color:#0B2B15;font-family:'Archivo',sans-serif;font-size:13.5px;font-weight:700;letter-spacing:.02em;padding:14px;border-radius:8px;text-decoration:none;transition:filter .2s,transform .15s;}
+.cp-wa:hover{filter:brightness(1.06);transform:translateY(-1px);}
+.cp-wa svg{width:18px;height:18px;flex-shrink:0;}
+
+footer{padding:26px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;background:var(--slate);}
+.footer-logo{font-family:'Archivo Black',sans-serif;font-size:12px;letter-spacing:.015em;max-width:280px;line-height:1.3;}
+.footer-mid{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--snow-dim);letter-spacing:.03em;}
+.footer-r{font-size:11px;color:var(--line);}
+
+.wa-float{position:fixed;bottom:calc(24px + env(safe-area-inset-bottom));right:calc(24px + env(safe-area-inset-right));width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.35);z-index:70;transition:transform .2s;}
+.wa-float:hover{transform:scale(1.06);}
+.wa-float svg{width:28px;height:28px;color:#0B2B15;}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.2,.6,.2,1),transform .7s cubic-bezier(.2,.6,.2,1);}
+.reveal.in{opacity:1;transform:translateY(0);}
+.nav-links > a.active{color:var(--snow);}
+
+@media(max-width:900px){
+  nav{padding:14px 20px;}
+  .nav-links{display:none;}
+  .phone-mini{display:none;}
+  #hero{padding:60px 20px 60px;}
+  .hero-inner{grid-template-columns:1fr;gap:36px;}
+  section{padding:60px 20px;}
+  .cov-grid{grid-template-columns:1fr;}
+  .cov-cell{border-bottom:1px solid var(--line);}
+  .partner-slot{width:100%;max-width:280px;height:64px;}
+  .partners-row{flex-direction:column;align-items:center;}
+  .trades-grid{grid-template-columns:1fr;}
+  .portfolio-grid{grid-template-columns:1fr;}
+  .portfolio-top{flex-direction:column;}
+  .portfolio-cta{align-self:flex-start;}
+  .maint-grid,.area-grid,.contact-grid{grid-template-columns:1fr;}
+  .alert-bar{font-size:11px;padding:8px 12px;}
+}
+</style>
+</head>
+<body>
+
+<div class="alert-bar">
+  NO HEAT OR NO HOT WATER? 24/7 EMERGENCY DISPATCH · <a href="tel:2503183978">CALL OR TEXT 250-318-3978</a>
+</div>
+
+<nav>
+  <div class="logo">
+    <svg class="logo-mark" viewBox="0 0 40 40" fill="none">
+      <path d="M20 4L6 26H15V36H25V26H34L20 4Z" fill="#E8622C"/>
+      <path d="M20 4L6 26H15V36H25V26H34L20 4Z" stroke="#F5F2EA" stroke-width="1" fill-opacity="0" opacity="0.3"/>
+    </svg>
+    <div class="logo-text">
+      <span class="l1">SUN PEAKS PLUMBING</span>
+      <span class="l2">HEATING &amp; ELECTRICAL</span>
+      <span class="l3">Sun Peaks / Kamloops</span>
+    </div>
+  </div>
+  <div class="nav-links">
+    <div class="nav-drop" id="servicesDrop">
+      <button class="nav-drop-trig" onclick="toggleDrop('servicesDrop')">
+        Services
+        <svg class="nav-drop-caret" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="nav-drop-menu">
+        <a class="nav-drop-item" href="#trades"><span class="ndi-t">Plumbing</span><span class="ndi-d">Tanks, leaks, fixtures, rentals</span></a>
+        <a class="nav-drop-item" href="#trades"><span class="ndi-t">Gas Fitting</span><span class="ndi-d">Furnaces, fireplaces, inspections</span></a>
+        <a class="nav-drop-item" href="#trades"><span class="ndi-t">Electrical</span><span class="ndi-d">Panels, surge protection, heat pumps</span></a>
+      </div>
+    </div>
+    <div class="nav-drop" id="aboutDrop">
+      <button class="nav-drop-trig" onclick="toggleDrop('aboutDrop')">
+        About
+        <svg class="nav-drop-caret" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="nav-drop-menu">
+        <a class="nav-drop-item" href="#maintenance"><span class="ndi-t">Annual Maintenance</span><span class="ndi-d">Why yearly service matters</span></a>
+        <a class="nav-drop-item" href="#area"><span class="ndi-t">Service Area</span><span class="ndi-d">Sun Peaks to Kamloops</span></a>
+      </div>
+    </div>
+    <a href="#portfolio">For Property Managers</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="nav-cta">
+    <div class="phone-mini"><span>Dispatch</span>250-318-3978</div>
+    <a href="tel:2503183978" class="btn-call">Call Now</a>
+  </div>
+</nav>
+
+<section id="hero">
+  <svg class="topo" viewBox="0 0 1400 700" preserveAspectRatio="none">
+    <path d="M-50,600 Q300,500 500,550 T900,480 T1450,540" stroke="#7FA6B3" stroke-width="1" fill="none"/>
+    <path d="M-50,550 Q320,440 520,500 T920,420 T1450,480" stroke="#7FA6B3" stroke-width="1" fill="none"/>
+    <path d="M-50,500 Q340,380 540,440 T940,360 T1450,420" stroke="#7FA6B3" stroke-width="1" fill="none"/>
+    <path d="M-50,450 Q360,320 560,380 T960,300 T1450,360" stroke="#7FA6B3" stroke-width="1" fill="none"/>
+    <path d="M-50,400 Q380,260 580,320 T980,240 T1450,300" stroke="#7FA6B3" stroke-width="1" fill="none"/>
+  </svg>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow"><span class="dot"></span>Licensed &amp; Insured · Sun Peaks / Kamloops</div>
+      <h1 class="hero-h">Plumbing, gas<br>&amp; heating,<br><span class="accent">handled right.</span></h1>
+      <p class="hero-sub">One crew, three licenses. <strong>Plumbing, gas fitting and electrical</strong> under one dispatch line, for mountain homes, rentals and everything the Kamloops valley throws at your pipes.</p>
+      <div class="hero-actions">
+        <a href="tel:2503183978" class="btn-primary">Call or Text Dispatch →</a>
+        <a href="#trades" class="btn-outline">See Our Services</a>
+      </div>
+      <div class="hero-licenses">
+        <div class="lic"><div class="lic-label">Gas Contractor</div><div class="lic-val">LGA0203664</div></div>
+        <div class="lic"><div class="lic-label">Electrical Contractor</div><div class="lic-val">CEL010024850</div></div>
+        <div class="lic"><div class="lic-label">Coverage</div><div class="lic-val">Sun Peaks · Kamloops</div></div>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <div class="hero-panel-head">
+        <span class="hero-panel-title">What we handle</span>
+        <span class="status-live"><span class="status-dot"></span>DISPATCH OPEN</span>
+      </div>
+      <div class="hero-panel-body">
+        <div class="range-row">
+          <span class="range-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1 3-2 4-2 7a4 4 0 0 0 8 0c0-1-.5-2-1-3 1 0 2 1 2 3a7 7 0 1 1-14 0c0-4 3-5 4-9 1 2 2 2 3 2z"/></svg></span>
+          <div><div class="range-t">Furnaces &amp; Boilers</div><div class="range-d">Install, repair, annual service</div></div>
+        </div>
+        <div class="range-row">
+          <span class="range-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v6M10 3v6M6 6h4"/><path d="M4 10h16l-1.5 9a2 2 0 0 1-2 2h-9a2 2 0 0 1-2-2L4 10z"/></svg></span>
+          <div><div class="range-t">Hot Water Tanks</div><div class="range-d">Tank &amp; tankless, gas or electric</div></div>
+        </div>
+        <div class="range-row">
+          <span class="range-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/></svg></span>
+          <div><div class="range-t">Fireplaces</div><div class="range-d">Gas fireplace install &amp; tune-up</div></div>
+        </div>
+        <div class="range-row">
+          <span class="range-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg></span>
+          <div><div class="range-t">Electrical &amp; Surge Protection</div><div class="range-d">Panel work, surge protection devices</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="coverage">
+  <div class="cov-grid reveal">
+    <div class="cov-cell"><div class="cov-n">3</div><div class="cov-l">Licensed trades under one roof</div></div>
+    <div class="cov-cell"><div class="cov-n">24/7</div><div class="cov-l">Emergency dispatch, no heat / no hot water</div></div>
+  </div>
+</section>
+
+<!--
+  PENDING CLIENT CONFIRMATION:
+  Kevin needs to confirm active membership status and provide official logo files
+  (correct resolution, as issued by each program) before these go live.
+  Do not substitute generic logos found online. See conversation notes.
+  Placeholders below: BC Hydro (Alliance of Energy Professionals), FortisBC (Trade Ally Network),
+  Energywise Home Solutions (relationship to be confirmed by Kevin).
+-->
+<section id="partners">
+  <div class="partners-label">Program memberships &amp; certifications</div>
+  <div class="partners-row reveal">
+    <div class="partner-slot" title="Pending: confirm active membership + official logo file">
+      <div class="partner-slot-text">
+        <div class="partner-slot-name">BC Hydro</div>
+        <div class="partner-slot-note">Logo pending confirmation</div>
+      </div>
+    </div>
+    <div class="partner-slot" title="Pending: confirm active membership + official logo file">
+      <div class="partner-slot-text">
+        <div class="partner-slot-name">FortisBC Trade Ally</div>
+        <div class="partner-slot-note">Logo pending confirmation</div>
+      </div>
+    </div>
+    <div class="partner-slot" title="Pending: confirm relationship + official logo file">
+      <div class="partner-slot-text">
+        <div class="partner-slot-name">Energywise Home Solutions</div>
+        <div class="partner-slot-note">Logo pending confirmation</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="trades">
+  <div class="sec-head"><span class="sec-eyebrow">01 · What we're licensed for</span></div>
+  <h2 class="sec-h">Three trades. <span class="accent">One dispatch line.</span></h2>
+  <p class="sec-intro">No handoffs between contractors. Your plumber, gas fitter and electrician are the same crew, which means fewer visits and one person accountable for the whole job.</p>
+  <div class="trades-grid reveal">
+    <div class="trade">
+      <span class="trade-badge">Plumbing</span>
+      <div class="trade-t">Plumbing</div>
+      <div class="trade-lic">All residential &amp; light commercial</div>
+      <ul class="trade-list">
+        <li>Hot water tank install &amp; repair</li>
+        <li>Leak detection &amp; repair</li>
+        <li>Fixture install &amp; replacement</li>
+        <li>Rental property maintenance</li>
+      </ul>
+    </div>
+    <div class="trade">
+      <span class="trade-badge">Gas · LGA0203664</span>
+      <div class="trade-t">Gas Fitting</div>
+      <div class="trade-lic">Licensed gas contractor</div>
+      <ul class="trade-list">
+        <li>Furnace &amp; boiler service</li>
+        <li>Gas fireplace install &amp; tune-up</li>
+        <li>Gas range &amp; BBQ hookups</li>
+        <li>Annual safety inspections</li>
+      </ul>
+    </div>
+    <div class="trade">
+      <span class="trade-badge">Electrical · CEL010024850</span>
+      <div class="trade-t">Electrical</div>
+      <div class="trade-lic">Licensed electrical contractor</div>
+      <ul class="trade-list">
+        <li>Heat pump electrical hookup</li>
+        <li>Surge protection devices</li>
+        <li>Panel &amp; circuit work</li>
+        <li>Appliance electrical install</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="portfolio">
+  <div class="portfolio-top">
+    <div class="portfolio-copy">
+      <div class="portfolio-tag"><span class="portfolio-tag-dot"></span>For property managers</div>
+      <h2 class="sec-h" style="margin-bottom:14px;">Managing more than<br>one unit?</h2>
+      <p class="portfolio-lead">If you're overseeing rentals across Sun Peaks, you already know a missed repair costs more than the invoice. <strong>We work with property managers as a standing arrangement</strong>, not a one-off call every time something breaks.</p>
+    </div>
+    <a href="tel:2503183978" class="portfolio-cta">Talk to Dispatch About Your Portfolio →</a>
+  </div>
+  <div class="portfolio-grid reveal">
+    <div class="pf-card">
+      <div class="pf-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+      <div class="pf-t">One contact, every unit</div>
+      <div class="pf-d">A single point of contact for all your properties, instead of chasing different trades for plumbing, gas and electrical separately.</div>
+    </div>
+    <div class="pf-card">
+      <div class="pf-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+      <div class="pf-t">Priority response in peak season</div>
+      <div class="pf-d">Standing arrangements get priority scheduling when winter and summer bookings are at their busiest.</div>
+    </div>
+    <div class="pf-card">
+      <div class="pf-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12h6M9 16h6M9 8h6"/><rect x="4" y="3" width="16" height="18" rx="2"/></svg></div>
+      <div class="pf-t">Consolidated billing</div>
+      <div class="pf-d">One invoice covering multiple properties, on a schedule that works for how you manage your books.</div>
+    </div>
+  </div>
+</section>
+
+<section id="maintenance">
+  <div class="maint-grid reveal">
+    <div>
+      <div class="sec-head"><span class="sec-eyebrow">02 · Annual maintenance</span></div>
+      <h2 class="sec-h" style="margin-bottom:24px;">Skip service, <span class="accent">skip your warranty.</span></h2>
+      <div class="maint-copy">
+        <p>Most manufacturers require <strong>annual servicing</strong> to keep warranties valid, and BC's Gas Safety Regulation puts real obligations on rental property owners to keep gas appliances maintained and documented.</p>
+        <p>We handle the service call and leave you with a record, so your appliance stays covered and your rental stays compliant.</p>
+      </div>
+    </div>
+    <div class="maint-panel">
+      <div class="maint-panel-t"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>Why annual service matters</div>
+      <div class="maint-item">
+        <span class="maint-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+        <div><div class="maint-item-t">Keeps manufacturer warranties valid</div><div class="maint-item-d">Most furnaces, boilers &amp; fireplaces require documented annual service.</div></div>
+      </div>
+      <div class="maint-item">
+        <span class="maint-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+        <div><div class="maint-item-t">Required for rental properties</div><div class="maint-item-d">BC Gas Safety Regulation requires owners to maintain and document servicing.</div></div>
+      </div>
+      <div class="maint-item">
+        <span class="maint-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+        <div><div class="maint-item-t">Catches small issues early</div><div class="maint-item-d">Before they become a no-heat call in the middle of a January storm.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="area">
+  <div class="sec-head"><span class="sec-eyebrow">03 · Where we work</span></div>
+  <h2 class="sec-h">From the resort<br><span class="accent">down to the valley.</span></h2>
+  <div class="area-grid reveal">
+    <div class="area-list">
+      <div class="area-row"><span class="area-elev">1255M</span><span class="area-name">Sun Peaks Resort</span><span class="area-note">Full-time &amp; seasonal homes</span></div>
+      <div class="area-row"><span class="area-elev">575M</span><span class="area-name">Heffley Creek</span><span class="area-note">On route</span></div>
+      <div class="area-row"><span class="area-elev">345M</span><span class="area-name">Kamloops</span><span class="area-note">Residential &amp; light commercial</span></div>
+      <div class="area-row"><span class="area-elev">···</span><span class="area-name">Surrounding areas</span><span class="area-note">Ask dispatch</span></div>
+    </div>
+    <div class="area-map-panel">
+      <svg width="90%" height="220" viewBox="0 0 400 220">
+        <path d="M0,180 Q80,60 160,110 T400,50" stroke="#E8622C" stroke-width="2" fill="none"/>
+        <circle cx="160" cy="110" r="4" fill="#E8622C"/>
+        <circle cx="0" cy="180" r="4" fill="#7FA6B3"/>
+        <text x="150" y="95" fill="#F5F2EA" font-family="IBM Plex Mono" font-size="11">Sun Peaks</text>
+        <text x="10" y="200" fill="#7FA6B3" font-family="IBM Plex Mono" font-size="11">Kamloops</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-grid reveal">
+    <div>
+      <h2 class="contact-h">No heat? No hot<br>water? <span class="accent">Call dispatch.</span></h2>
+      <p class="contact-sub">For emergencies, call or text 250-318-3978 anytime. For everything else, quotes, annual service, installs, send us your details and we'll get back to you the same business day.</p>
+      <div class="contact-actions">
+        <a href="tel:2503183978" class="btn-primary">Call or Text 250-318-3978</a>
+      </div>
+    </div>
+    <div class="contact-panel">
+      <div class="cp-head">
+        <div>
+          <div class="cp-head-t">Request Service</div>
+          <div class="cp-head-s">Same-day response</div>
+        </div>
+        <span class="status-live"><span class="status-dot"></span>OPEN</span>
+      </div>
+      <div class="cp-body">
+        <a href="https://wa.me/12503183978?text=Hi%2C%20I%27d%20like%20to%20request%20service%20from%20Sun%20Peaks%20Plumbing%2C%20Heating%20and%20Electrical" class="cp-wa" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Message on WhatsApp
+        </a>
+        <div class="cp-divider"><div class="cp-divider-line"></div><span class="cp-divider-t">or send details</span><div class="cp-divider-line"></div></div>
+        <div class="cfield"><label>Name</label><input type="text" placeholder="Your name"></div>
+        <div class="cfield"><label>Phone</label><input type="text" placeholder="250-000-0000"></div>
+        <div class="cfield"><label>What do you need?</label><textarea placeholder="Furnace service, hot water tank, gas fireplace..."></textarea></div>
+        <button class="form-submit">Send Request</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">SUN PEAKS PLUMBING, HEATING AND ELECTRICAL</div>
+  <div class="footer-mid">GAS LGA0203664 · ELECTRICAL CEL010024850</div>
+  <div class="footer-r">Sun Peaks · Kamloops, BC</div>
+</footer>
+
+<a href="https://wa.me/12503183978?text=Hi%2C%20I%27d%20like%20to%20request%20service%20from%20Sun%20Peaks%20Plumbing%2C%20Heating%20and%20Electrical" class="wa-float" target="_blank" aria-label="Message on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+function toggleDrop(id){
+  var el = document.getElementById(id);
+  var isOpen = el.classList.contains('open');
+  document.querySelectorAll('.nav-drop.open').forEach(function(d){ d.classList.remove('open'); });
+  if(!isOpen){ el.classList.add('open'); }
+}
+document.addEventListener('click', function(e){
+  if(!e.target.closest('.nav-drop')){
+    document.querySelectorAll('.nav-drop.open').forEach(function(d){ d.classList.remove('open'); });
+  }
+});
+
+// Scroll reveal
+var revealObserver = new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){
+      entry.target.classList.add('in');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, {threshold:.15});
+document.querySelectorAll('.reveal').forEach(function(el){ revealObserver.observe(el); });
+
+// Active nav link on scroll
+var sections = document.querySelectorAll('section[id]');
+var navLink = document.querySelector('.nav-links > a[href="#contact"]');
+var navObserver = new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.target.id === 'contact' && navLink){
+      navLink.classList.toggle('active', entry.isIntersecting);
+    }
+  });
+}, {threshold:.4});
+sections.forEach(function(s){ navObserver.observe(s); });
+</script>
+</body>
+</html>
