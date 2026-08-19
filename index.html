@@ -194,22 +194,13 @@ section{padding:90px 48px;border-bottom:1px solid var(--line);}
 #area .area-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;}
 .area-list{display:flex;flex-direction:column;}
 .area-row{display:grid;grid-template-columns:28px 1fr auto;gap:16px;align-items:center;padding:18px 14px;border-bottom:1px solid var(--line);border-radius:8px;transition:background .15s,padding-left .15s;}
+.area-map-panel{border:1px solid var(--line);border-radius:14px;background:var(--panel-solid);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:32px;min-height:280px;}
 .area-row:hover{background:var(--panel-solid);padding-left:18px;}
 .area-row:first-child{border-top:1px solid var(--line);}
 .area-elev{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--glacier);}
 .area-name{font-family:'Archivo',sans-serif;font-size:15px;font-weight:700;}
 .area-note{font-size:12px;color:var(--snow-dim);}
-.area-map-panel{border:1px solid var(--line);border-radius:14px;background:var(--panel-solid);display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;padding:36px 32px;}
-.area-summary{position:relative;padding-left:22px;}
-.area-summary::before{content:'';position:absolute;left:5px;top:8px;bottom:8px;width:1px;background:linear-gradient(var(--ember),var(--glacier));}
-.area-summary-row{position:relative;display:flex;align-items:baseline;justify-content:space-between;padding:6px 0;}
-.area-summary-row::before{content:'';position:absolute;left:-22px;top:50%;transform:translateY(-50%);width:9px;height:9px;border-radius:50%;background:var(--ember);border:2px solid var(--panel-solid);}
-.area-summary-row:last-child::before{background:var(--glacier);}
-.area-summary-t{font-family:'Archivo',sans-serif;font-size:16px;font-weight:700;color:var(--snow);}
-.area-summary-elev{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--snow-dim);}
-.area-summary-line{padding:10px 0 10px 0;margin-left:2px;}
-.area-summary-dist{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--glacier);letter-spacing:.03em;}
-.area-summary-note{margin-top:24px;font-size:12.5px;color:var(--snow-dim);line-height:1.6;border-top:1px solid var(--line);padding-top:18px;}
+
 
 /* CONTACT */
 #contact{background:var(--panel-solid);border-bottom:none;}
@@ -251,10 +242,6 @@ footer{padding:26px 48px;display:flex;align-items:center;justify-content:space-b
 .reveal.in{opacity:1;transform:translateY(0);}
 .nav-links > a.active{color:var(--snow);}
 
-@media(min-width:901px){
-  .area-map-panel{min-height:280px;}
-}
-
 @media(max-width:900px){
   nav{padding:14px 20px;}
   .nav-links{display:none;}
@@ -266,13 +253,14 @@ footer{padding:26px 48px;display:flex;align-items:center;justify-content:space-b
   .cov-grid{grid-template-columns:1fr;}
   .cov-cell{border-bottom:1px solid var(--line);}
   .partner-slot{width:100%;max-width:280px;height:64px;}
-  .area-map-panel{padding:20px;}
   .partners-row{flex-direction:column;align-items:center;}
   .trades-grid{grid-template-columns:1fr;}
   .portfolio-grid{grid-template-columns:1fr;}
   .portfolio-top{flex-direction:column;}
   .portfolio-cta{align-self:flex-start;}
-  #area .area-grid,.maint-grid,.contact-grid{grid-template-columns:1fr;}
+  #area .area-grid{grid-template-columns:1fr !important;}
+  .area-map-panel{display:none !important;}
+  .maint-grid,.contact-grid{grid-template-columns:1fr;}
   .alert-bar{font-size:11px;padding:8px 12px;}
 }
 </style>
@@ -555,20 +543,13 @@ footer{padding:26px 48px;display:flex;align-items:center;justify-content:space-b
       <div class="area-row"><span class="area-elev">···</span><span class="area-name">Surrounding areas</span><span class="area-note">Ask dispatch</span></div>
     </div>
     <div class="area-map-panel">
-      <div class="area-summary">
-        <div class="area-summary-row">
-          <span class="area-summary-t">Sun Peaks</span>
-          <span class="area-summary-elev">1255M</span>
-        </div>
-        <div class="area-summary-line">
-          <span class="area-summary-dist">≈ 45 min drive</span>
-        </div>
-        <div class="area-summary-row">
-          <span class="area-summary-t">Kamloops</span>
-          <span class="area-summary-elev">345M</span>
-        </div>
-      </div>
-      <div class="area-summary-note">One crew, covering resort and valley on the same route.</div>
+      <svg width="90%" height="220" viewBox="0 0 400 220">
+        <path d="M0,180 Q80,60 160,110 T400,50" stroke="#E8622C" stroke-width="2" fill="none"/>
+        <circle cx="160" cy="110" r="4" fill="#E8622C"/>
+        <circle cx="0" cy="180" r="4" fill="#7FA6B3"/>
+        <text x="150" y="95" fill="#F5F2EA" font-family="IBM Plex Mono" font-size="11">Sun Peaks</text>
+        <text x="10" y="200" fill="#7FA6B3" font-family="IBM Plex Mono" font-size="11">Kamloops</text>
+      </svg>
     </div>
   </div>
 </section>
