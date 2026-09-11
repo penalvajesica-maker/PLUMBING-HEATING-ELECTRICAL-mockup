@@ -88,7 +88,9 @@ nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-con
 .mobile-drawer-group{margin-bottom:22px;}
 .mobile-drawer-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--glacier);text-transform:uppercase;margin-bottom:10px;}
 .mobile-drawer a.mobile-link{display:block;font-family:'Archivo',sans-serif;font-size:15px;font-weight:700;color:var(--snow);text-decoration:none;padding:11px 0;border-bottom:1px solid var(--line);}
-.mobile-drawer a.mobile-sublink{display:block;font-size:13px;color:var(--snow-dim);text-decoration:none;padding:9px 0 9px 14px;border-bottom:1px solid var(--line);}
+.mobile-drawer a.mobile-sublink{display:flex;flex-direction:column;gap:2px;text-decoration:none;padding:9px 0 9px 14px;border-bottom:1px solid var(--line);}
+.mobile-drawer a.mobile-sublink .msl-t{font-size:13.5px;font-weight:700;color:var(--snow);}
+.mobile-drawer a.mobile-sublink .msl-d{font-size:11.5px;color:var(--snow-dim);}
 .mobile-drawer-cta{margin-top:auto;padding-top:20px;}
 .mobile-drawer-cta a{display:flex;align-items:center;justify-content:center;font-family:'Archivo',sans-serif;font-size:13px;font-weight:700;color:var(--slate);background:var(--ember);padding:14px;border-radius:10px;text-decoration:none;}
 
@@ -387,15 +389,15 @@ footer{padding:26px 48px;display:flex;align-items:center;justify-content:space-b
 
   <div class="mobile-drawer-group">
     <div class="mobile-drawer-label">Services</div>
-    <a class="mobile-sublink" href="#trades" onclick="toggleDrawer()">Plumbing</a>
-    <a class="mobile-sublink" href="#trades" onclick="toggleDrawer()">Gas Fitting</a>
-    <a class="mobile-sublink" href="#trades" onclick="toggleDrawer()">Electrical</a>
+    <a class="mobile-sublink" href="#trades" onclick="toggleDrawer()"><span class="msl-t">Plumbing</span><span class="msl-d">Hot water tanks, fixtures, pipes</span></a>
+    <a class="mobile-sublink" href="#trades" onclick="toggleDrawer()"><span class="msl-t">Gas Fitting</span><span class="msl-d">Furnaces, boilers, fireplaces</span></a>
+    <a class="mobile-sublink" href="#trades" onclick="toggleDrawer()"><span class="msl-t">Electrical</span><span class="msl-d">Panels, surge protectors, heat pumps</span></a>
   </div>
 
   <div class="mobile-drawer-group">
     <div class="mobile-drawer-label">About</div>
-    <a class="mobile-sublink" href="#maintenance" onclick="toggleDrawer()">Annual Maintenance</a>
-    <a class="mobile-sublink" href="#area" onclick="toggleDrawer()">Service Area</a>
+    <a class="mobile-sublink" href="#maintenance" onclick="toggleDrawer()"><span class="msl-t">Annual Maintenance</span><span class="msl-d">Why yearly service matters</span></a>
+    <a class="mobile-sublink" href="#area" onclick="toggleDrawer()"><span class="msl-t">Service Area</span><span class="msl-d">Sun Peaks to Kamloops</span></a>
   </div>
 
   <div class="mobile-drawer-group">
