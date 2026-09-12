@@ -264,6 +264,7 @@ footer{padding:26px 48px;display:flex;align-items:center;justify-content:space-b
 
 @media(max-width:900px){
   nav{padding:14px 20px;}
+  .btn-call{font-size:11px;padding:9px 14px;}
   .nav-links{display:none;}
   .hamburger{display:flex;}
   .phone-mini{display:none;}
@@ -374,7 +375,7 @@ footer{padding:26px 48px;display:flex;align-items:center;justify-content:space-b
   </div>
   <div class="nav-cta">
     <div class="phone-mini"><span>Dispatch</span>250-319-0791</div>
-    <a href="tel:2503190791" class="btn-call">Call Now</a>
+    <a href="#contact" class="btn-call">Request Service</a>
     <button class="hamburger" id="navHamburger" onclick="toggleDrawer()" aria-label="Open menu">
       <span class="hamburger-lines"><span></span><span></span><span></span></span>
     </button>
@@ -406,7 +407,7 @@ footer{padding:26px 48px;display:flex;align-items:center;justify-content:space-b
   </div>
 
   <div class="mobile-drawer-cta">
-    <a href="tel:2503190791">Call or Text 250-319-0791</a>
+    <a href="#contact" onclick="toggleDrawer()">Request Service</a>
   </div>
 </div>
 
@@ -424,7 +425,7 @@ footer{padding:26px 48px;display:flex;align-items:center;justify-content:space-b
       <h1 class="hero-h">Plumbing, gas<br>&amp; electrical,<br><span class="accent">handled right.</span></h1>
       <p class="hero-sub">One crew, three licenses. <strong>Plumbing, gas fitting and electrical</strong> under one dispatch line, for mountain homes, rentals and everything the Kamloops valley throws at your pipes.</p>
       <div class="hero-actions">
-        <a href="tel:2503190791" class="btn-primary">Call or Text Dispatch →</a>
+        <a href="#contact" class="btn-primary">Request Service →</a>
         <a href="#trades" class="btn-outline">See Our Services</a>
       </div>
     </div>
@@ -566,7 +567,7 @@ footer{padding:26px 48px;display:flex;align-items:center;justify-content:space-b
       <span class="maint-banner-eyebrow">Winter's coming to Sun Peaks. Don't wait for a no-heat call</span>
       <h3 class="maint-banner-h">Reduce risk. Book annual preventive maintenance.</h3>
     </div>
-    <a href="tel:2503190791" class="maint-banner-cta">Book Maintenance →</a>
+    <a href="#contact" class="maint-banner-cta">Book Maintenance →</a>
   </div>
   </div>
 </section>
@@ -579,7 +580,7 @@ footer{padding:26px 48px;display:flex;align-items:center;justify-content:space-b
       <h2 class="sec-h" style="margin-bottom:14px;">Managing more than<br>one unit?</h2>
       <p class="portfolio-lead">If you're overseeing rentals across Sun Peaks, you already know a missed repair costs more than the invoice. <strong>We work with property managers as a standing arrangement</strong>, not a one-off call every time something breaks.</p>
     </div>
-    <a href="tel:2503190791" class="portfolio-cta">Talk to Dispatch About Your Portfolio →</a>
+    <a href="#contact" class="portfolio-cta">Talk to Dispatch About Your Portfolio →</a>
   </div>
   <div class="portfolio-grid reveal">
     <div class="pf-card">
@@ -629,8 +630,12 @@ footer{padding:26px 48px;display:flex;align-items:center;justify-content:space-b
     <div>
       <h2 class="contact-h">No heat? No hot water? <span class="accent">Call dispatch.</span></h2>
       <p class="contact-sub">For emergencies, call or text 250-319-0791 anytime. For everything else, quotes, annual service, installs, send us your details and we'll get back to you as soon as possible.</p>
-      <div class="contact-actions">
-        <a href="tel:2503190791" class="btn-primary">Call or Text 250-319-0791</a>
+      <div class="contact-actions" style="flex-direction:column;max-width:340px;">
+        <a href="tel:2503190791" class="btn-primary" style="width:100%;text-align:center;box-sizing:border-box;">Call or Text 250-319-0791</a>
+        <a href="https://wa.me/12503190791?text=Hi%2C%20I%27d%20like%20to%20request%20service%20from%20Sun%20Peaks%20Plumbing%2C%20Gas%20and%20Electrical" class="cp-wa" target="_blank" style="width:100%;box-sizing:border-box;">
+          <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Message on WhatsApp
+        </a>
       </div>
     </div>
     <div class="contact-panel">
@@ -649,13 +654,9 @@ footer{padding:26px 48px;display:flex;align-items:center;justify-content:space-b
         submissions to: kevinewhs@gmail.com
       -->
       <form class="cp-body" data-notify-email="kevinewhs@gmail.com" onsubmit="return false;">
-        <a href="https://wa.me/12503190791?text=Hi%2C%20I%27d%20like%20to%20request%20service%20from%20Sun%20Peaks%20Plumbing%2C%20Gas%20and%20Electrical" class="cp-wa" target="_blank">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Message on WhatsApp
-        </a>
-        <div class="cp-divider"><div class="cp-divider-line"></div><span class="cp-divider-t">or send details</span><div class="cp-divider-line"></div></div>
         <div class="cfield"><label>Name</label><input type="text" name="name" placeholder="Your name"></div>
         <div class="cfield"><label>Phone</label><input type="text" name="phone" placeholder="Your phone number"></div>
+        <div class="cfield"><label>Email</label><input type="email" name="email" placeholder="Your email address"></div>
         <div class="cfield"><label>Where do you live?</label><input type="text" name="location" placeholder="e.g. Crystal Forest #13, Fairways Drive #2406"></div>
         <div class="cfield"><label>What do you need?</label><textarea name="message" placeholder="Service &amp; Inspections, Installation, Repair..."></textarea></div>
         <button type="submit" class="form-submit">Send Request</button>
